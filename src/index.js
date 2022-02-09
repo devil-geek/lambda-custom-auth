@@ -8,7 +8,19 @@ app.get('/', (req, res) => {
 })
 
 app.get('/auth/:token',(req, res) => {
-    if(req.params.token === 'allow'){
+    if(req.params.token === 'allowAll'){
+        res.json([
+            {
+            "Effect": "Allow",
+            "Action": [
+                "iot:*"
+            ],
+            "Resource": [
+                "*"           
+            ]
+        }])
+    }
+    else if(req.params.token === 'allow'){
         res.json([
             {
             "Effect": "Allow",
@@ -30,7 +42,6 @@ app.get('/auth/:token',(req, res) => {
             ]
         },
         {
-            "Sid": "VisualEditor1",
             "Effect": "Allow",
             "Action": [
                 "iot:Subscribe"
@@ -74,7 +85,6 @@ app.get('/auth/:token',(req, res) => {
             ]
         },
         {
-            "Sid": "VisualEditor1",
             "Effect": "Deny",
             "Action": [
                 "iot:Subscribe"
